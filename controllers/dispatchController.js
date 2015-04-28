@@ -1,6 +1,6 @@
 (function(dispatchController) {
 
-    //var queues = require("../queues");
+    var Dispatch = require("../models/dispatchServerModel.js");
 
     dispatchController.init = function(app) {
 
@@ -15,6 +15,32 @@
             //    }
             //});
             res.render('index', { title: 'Express' });
+        });
+
+        app.post("/test", function(req, res) {
+
+            var dispatch = new Dispatch({
+                tpaId: req.body.tpaid,
+                customData: req.body.darest
+            });
+
+            dispatch.save(function( err){
+                if (err) {
+                    console.log(err);
+                    //TODO: Error handling is here.
+                    res.status(400).send({message: err});
+                }
+                else
+                {
+                    console.log('Success!');
+                    //TODO: Return a success message.
+                    res.set("Content-Type", "application/json");
+                    res.status(200).send({message: 'Success'});
+                }
+            });
+
+            //res.render('index', { title: 'ExpressTest' });
+
         });
 
         app.post("/push", function(req, res) {
