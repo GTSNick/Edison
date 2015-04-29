@@ -27,13 +27,13 @@
             dispatch.save(function( err){
                 if (err) {
                     console.log(err);
-                    //TODO: Error handling is here.
+                    //TODO: Error handling should be here.
                     res.status(400).send({message: err});
                 }
                 else
                 {
                     console.log('Success!');
-                    //TODO: Return a success message.
+                    //Return a success message.
                     res.set("Content-Type", "application/json");
                     res.status(200).send({message: 'Success'});
                 }
